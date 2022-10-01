@@ -1,0 +1,70 @@
+#wrapper{
+    display: flex;
+}
+
+.active{
+    border-bottom-left-radius: 1rem;
+    border-top-left-radius: 1rem;
+    --bs-bg-opacity: 1;
+    background-color: rgba(var(--bs-white-rgb),var(--bs-bg-opacity))!important;
+}
+
+.active a {
+    margin-left: 3rem!important;
+    color: rgba(var(--bs-dark-rgb),var(--bs-text-opacity))!important;
+
+}
+
+ul li:hover {
+    --bs-bg-opacity: 1;
+    background-color: rgba(var(--bs-white-rgb),var(--bs-bg-opacity))!important;
+    border-bottom-left-radius: 1rem;
+    border-top-left-radius: 1rem;
+}
+
+ul li:hover a{
+    margin-left: 3rem!important;
+    color: rgba(var(--bs-dark-rgb),var(--bs-text-opacity))!important;
+}
+
+ul li hr {
+    --bs-bg-opacity: 1;
+    background-color: rgba(var(--bs-white-rgb),var(--bs-bg-opacity))!important;
+    margin: 0;
+    border: 0;
+    border-top: 1px solid;
+    opacity: 100;
+    
+}
+
+.row-no-margin { 
+    margin-right: 0; 
+    padding-right: 0;
+    
+}
+
+.hover-btn-icons:hover {
+    font-size: 1.50rem!important
+}    
+
+
+table tbody tr:hover {
+    cursor: pointer;
+}
+
+.my-table thead tr{
+    line-height:2.3rem;
+}
+
+
+.table>:not(caption)>*>*{
+    border-bottom-width: 2px;
+    padding: 1rem 1rem;
+}
+
+
+
+
+
+
+

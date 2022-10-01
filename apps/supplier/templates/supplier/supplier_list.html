@@ -1,0 +1,87 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %} Lista de proveedores {% endblock %}
+
+{% block content %}
+
+<div class="row px-4 ">
+    <h2 class="d-flex justify-content-center pb-2"><i class="bi bi-file-earmark-text  pe-1"></i> Lista de proveedores </h2>
+    <div class="input-group col">
+        <input type="text" class="form-control" id="input_search" placeholder="Buscar proveedor"
+            aria-describedby="btn_search">
+        <button class="btn btn-outline-primary" type="button" id="btn_search">Buscar</button>
+    </div>
+
+    <div class="d-grid gap-2 col d-md-flex">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#supplier-form-modal">
+            <i class="bi bi-clipboard-plus pe-1"></i> Nuevo proveedor
+        </button>
+    </div>
+</div>
+<hr>
+
+<div class="row px-4">
+    <table class="table my-table table-hover text-center">
+        <thead class="fw-semibold ">
+            <tr>
+                <th scope="col"> Estado </th>
+                <th scope="col">Id - Nit</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Telefono</th>
+                <th scope="col">En bodega</th>
+                <th scope="col">En espera</th>
+                <th scope="col">En prestamo</th>
+            </tr>
+        </thead>
+        <tbody  id="supplier-table-list" >
+            {%for supplier in object_list%}
+            <tr id='tr-{{supplier.id}}' class="text-muted" onclick="supplier_detail({{supplier.id}})">
+                {% if supplier.state %}
+                    <th id="td-state-{{supplier.id}}"><i class="bi bi-check-circle-fill text-success"></i></th>
+                {%else %}
+                    <th id="td-state-{{supplier.id}}"><i class="bi bi-x-circle-fill text-danger"></i></th>
+                {%endif%}
+                <th >{{supplier.identifier}}</th>
+                <td id="td-name-{{supplier.id}}">{{supplier.name}}</td>
+                <td id="td-phone-{{supplier.id}}">
+                    {%if supplier.phone == None %}
+                        No registrado
+                    {% else %}
+                        {{supplier.phone}}
+                    {% endif %}
+                </td>
+                {% if supplier.stock_cellar.stock_cellar__sum > 10 %}
+                    <td class="text-success fw-semibold"><i class="bi bi-patch-check-fill"></i> {{supplier.stock_cellar.stock_cellar__sum}}</td>
+                {% elif supplier.stock_cellar.stock_cellar__sum > 0 %}
+                    <td class="text-warning fw-semibold"><i class="bi bi-patch-exclamation-fill"></i> {{supplier.stock_cellar.stock_cellar__sum}}</td>
+                {% else %}
+                    <td class="text-danger fw-semibold"><i class="bi bi-patch-exclamation-fill"></i> {{supplier.stock_cellar.stock_cellar__sum}}</td>
+                {% endif %}
+                {% if supplier.stock_wait.stock_wait__sum > 0 %}
+                    <td class="text-warning fw-semibold"><i class="bi bi-patch-exclamation-fill"></i> {{supplier.stock_wait.stock_wait__sum}}</td>
+                {% else %}
+                    <td class="text-success fw-semibold"><i class="bi bi-patch-check-fill"></i> {{supplier.stock_wait.stock_wait__sum}}</td>
+                {% endif %}
+                {% if supplier.stock_loan.stock_loan__sum > 0 %}
+                    <td class="text-warning fw-semibold"><i class="bi bi-patch-exclamation-fill"></i> {{supplier.stock_loan.stock_loan__sum}}</td>
+                {% else %}
+                    <td class="text-success fw-semibold"><i class="bi bi-patch-check-fill"></i> {{supplier.stock_loan.stock_loan__sum}}</td>
+                {% endif %}
+            </tr>
+            {%endfor%}
+        </tbody>
+    </table>
+</div>
+{% include 'supplier/supplier_form.html' %}
+{% include 'core/success.html' %}
+{% include 'supplier/supplier_detail.html' %}
+
+{% endblock%}
+
+{% block js%}
+<script src="{% static 'js/core/functions.js' %} "></script>
+<script src="{% static 'js/supplier/functions.js' %} "></script>
+<script src="{% static 'js/supplier/style.js' %} "></script>
+
+{%endblock%}

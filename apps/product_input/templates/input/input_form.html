@@ -1,0 +1,74 @@
+<div class="modal fade" id="input-form-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="titleModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="titleModal">Registrar nueva entrada</h5>
+                <button type="button" class="btn-close"
+                    onclick="reset_input()"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid  ">
+                    <form class="text-muted fst-italic text-center row" id="input-form"
+                        action="{% url 'product:product_create' %}" method="POST" autocomplete="off">
+                        {%csrf_token%}
+                        <div class="form-floating col-6 mb-3 ">
+                            <input type="text" class="form-control " name='reference' id="reference"
+                                placeholder="Número de referencia">
+                            <label for="reference" class="ms-3">Número de referencia</label>
+                            <div class="invalid-feedback" id="invalid-reference"></div>
+                        </div>
+                        <div class="form-floating col-6 mb-3 ">
+                            <input type="text" class="form-control " name='supplier' id="supplier"
+                                placeholder="Proveedor">
+                            <label for="supplier" class="ms-3">Proveedor</label>
+                            <div class="invalid-feedback" id="invalid-supplier"></div>
+                        </div>
+                        <div class="form-floating col-6 mb-3 ">
+                            <input type="text" class="form-control " name='code' id="code" placeholder="Producto">
+                            <label for="code" class="ms-3">Producto</label>
+                            <div class="invalid-feedback" id="invalid-code"></div>
+                        </div>
+                        <div class="form-floating col-4 mb-3 ">
+                            <input type="number" class="form-control " name='quantity' id="quantity"
+                                placeholder="Cantidad">
+                            <label for="quantity" class="ms-3">Cantidad</label>
+                            <div class="invalid-feedback" id="invalid-quantity"></div>
+                        </div>
+                        <div class="form-floating col-2 mt-2">
+                            <button class="btn btn-secondary" type="button" id='btn-add' onclick='get_product()'>Agregar</button>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="container-fluid ">
+                    <h5 class="text-center">Lista productos</h5>
+                    <table class="table text-center">
+                        <thead>
+                            <tr>
+                                <th>Codigo</th>
+                                <th>Nombre</th>
+                                <th>Cantidad</th>
+                                <th>Accion</th>
+                            </tr>
+                        </thead>
+                        <tbody id='input_product_list'>
+                            
+                        </tbody>
+                    </table>
+                    <div class="alert alert-danger text-center visually-hidden" id='alert-list' role="alert">
+                        
+                    </div>
+                </div>
+                <div class="gap-3 d-flex justify-content-center mt-3">
+                    <button class="btn btn-primary" type="button" id='btn-save' onclick='create_input()'><i
+                            class="bi bi-bookmark-check"></i> Guardar</button>
+                    <div class="vr"></div>
+                    <button class="btn btn-danger" type="button"
+                        onclick="reset_input()"><i
+                            class="bi bi-x-lg "></i> Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

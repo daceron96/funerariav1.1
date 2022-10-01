@@ -1,0 +1,68 @@
+<div class="modal fade" id="deposit-form-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="titleModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="titleModal">Registro de ingreso de productos</h5>
+                <button type="button" class="btn-close"
+                    onclick="reset_input('deposit')"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container row">
+                    <div class="col" id="reference-deposit-modal">
+                    </div>
+                    <div class="col ms-auto" id="supplier-deposit-modal">
+                    </div>
+                    <div class="col text-end ">
+                        <a class="btn btn-primary" download id="btn-download"><i class="bi bi-box-arrow-down"></i> Descargar</a>
+                    </div>
+                </div>
+                <div class="container-fluid  ">
+                    <form class="text-muted fst-italic text-center row" id="deposit-form"  autocomplete='off'>
+                        {%csrf_token%}
+                        <h6>Ingresa el codigo QR</h6>
+                        <div class="form-floating col-10 mb-3 ">
+                            <input type="text" class="form-control " name='code-deposit' id="code-deposit" placeholder="Producto">
+                            <label for="code-deposit" class="ms-3">Producto</label>
+                            <div class="invalid-feedback" id="invalid-code-deposit"></div>
+                            <div class="valid-feedback" id="valid-code-deposit"></div>
+
+                        </div>
+                        
+                        <div class="form-floating col-2 mt-2">
+                            <button class="btn btn-secondary" type="button" id='btn-add-deposit' onclick='validate_code_list()'>Agregar</button>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="container-fluid ">
+                    <h5 class="text-center">Lista productos</h5>
+                    <table class="table text-center">
+                        <thead>
+                            <tr>
+                                <th>Estado</th>
+                                <th>Codigo</th>
+                                <th>Nombre</th>
+                                <th>En espera</th>
+                                <th>Ingresado</th>
+                            </tr>
+                        </thead>
+                        <tbody id='input_deposit_list'>
+                            
+                        </tbody>
+                    </table>
+                    <div class="alert alert-danger text-center visually-hidden" id='alert-list' role="alert">
+                    </div>
+                </div>
+                <div class="gap-3 d-flex justify-content-center mt-3">
+                    <button class="btn btn-primary disabled" type="button" id='btn-save-deposit'><i
+                            class="bi bi-bookmark-check"></i> Guardar</button>
+                    <div class="vr"></div>
+                    <button class="btn btn-danger" type="button"
+                        onclick="reset_input('deposit')"><i
+                            class="bi bi-x-lg "></i> Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

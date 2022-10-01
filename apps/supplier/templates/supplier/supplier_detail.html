@@ -1,0 +1,53 @@
+<div class="modal fade" id="supplier-detail-modal" tabindex="-1" aria-labelledby="tile" aria-hidden="true">
+    <div class="modal-dialog modal-lg ">
+        <div class="modal-content">
+            <div class="modal-header ">
+                <h5 class="modal-title fw-bold" id="title"><i class="bi bi-file-earmark-text fs-3"></i> Detalle de proveedor</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <h6 id="supplier-name"><i class="bi bi-person-circle fs-5 "></i></h6>
+                        </div>
+                        <div class="col-md-3 ms-auto">
+                            <h6 id="supplier-identifier"><i class="bi bi-postcard-fill fs-5"></i></h6>
+                        </div>
+                        <div class="col-md-4 align-items-start ">
+                            <h6 id="supplier-phone"><i class="bi bi-phone-vibrate-fill fs-5"></i> </h6>
+                        </div>
+                        
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <table class="table my-table table-hover text-center ">
+                            <thead class="fw-semibold ">
+                                <tr>
+                                    <th scope="col">Codigo</th>
+                                    <th scope="col">Producto</th>
+                                    <th scope="col">En bodega</th>
+                                    <th scope="col">En espera</th>
+                                    <th scope="col">En prestamo</th>
+                                </tr>
+                            </thead>
+                            <tbody  id="supplier-list-modal" class=" text-muted" >
+                                
+                            </tbody>
+                        </table>
+                        
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer justify-content-center" id="btn-detail-modal">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i> Cerrar</button>
+                <div class="vr"></div>
+                <button type="button" class="btn btn-primary" id="btn-update-supplier"><i class="bi bi-pencil-fill"></i> Modificar</button>
+                <div class="vr"></div>
+                {% comment %} <button type="button" class="btn btn-danger" id="btn-disabled-suppllier"><i class="bi bi-x-circle"></i> Deshabilitar</button> {% endcomment %}
+            </div>
+        </div>
+    </div>
+</div>

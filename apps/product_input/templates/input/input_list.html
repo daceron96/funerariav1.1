@@ -1,0 +1,78 @@
+{%extends 'core/base.html' %}
+{%load static%}
+{%block title %}Lista de entradas{%endblock%}
+
+{%block content %}
+
+<div class="row px-4 ">
+    <h2 class="d-flex justify-content-center pb-2"><i class="bi bi-clipboard-data pe-1"></i> Lista de entradas </h2>
+    <div class="input-group col">
+        <input type="text" class="form-control" id="input_search" placeholder="Buscar producto"
+            aria-describedby="btn_search" onkeyup='product_autocomplete()'>
+        <button class="btn btn-outline-primary" type="button" id="btn_search"
+            onclick="filtrar_producto_nombre()">Buscar</button>
+    </div>
+    <div class="col">
+        <select class="form-select" id="select_category" onchange="filtrar_producto_categoria()">
+            <option value="-1">Todos los productos</option>
+            {% for category in categories %}
+            <option value="{{category.id}}">{{category.name}}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="d-grid gap-2 col d-md-flex">
+
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#input-form-modal">
+            <i class="bi bi-clipboard-plus pe-1"></i> Nueva entrada
+        </button>
+    </div>
+</div>
+
+<hr>
+
+<div class="row px-4">
+    <table class="table my-table table-hover text-center fst-italic">
+        <thead class="fw-semibold">
+            <tr>
+                <th>Estado</th>
+                <th>Referencia</th>
+                <th>Proveedor</th>
+                <th>Cantidad</th>
+                <th>Registro</th>
+            </tr>
+        </thead>
+        <tbody id="input-table-list">
+            {% for input in object_list %}
+            
+            <tr id='tr-list-{{input.id}}' class="text-muted" onclick='input_detail({{input.id}})' >
+
+                {% if input.in_wait %}
+                <th id="td-state-{{input.id}}"><i class="bi bi-patch-exclamation-fill text-warning"></i></th>
+                {%else %}
+                <th id="td-state-{{input.id}}"><i class="bi bi-patch-check-fill text-success"></i></th>
+                {%endif%}
+                <th>{{input.reference}} </th>
+                <td>{{input.supplier.name}}</td>
+                <td>{{input.quantity}}</td>
+                <td>{{input.created_date}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+{% include 'input/input_form.html' %}
+{% include 'input/input_deposit.html' %}
+{% include 'input/input_detail.html' %}
+{% include 'core/success.html' %}
+
+
+
+{%endblock%}
+
+{%block js%}
+<script src="{% static 'js/product_input/functions.js' %} "></script>
+<script src="{% static 'js/product_input/components.js' %} "></script>
+<script src="{% static 'js/product_input/style.js' %} "></script>
+<script src="{% static 'js/core/functions.js' %} "></script>
+{%endblock %}

@@ -1,0 +1,46 @@
+<div class="modal fade" id="input-detail-modal" tabindex="-1" aria-labelledby="tile" aria-hidden="true">
+    <div class="modal-dialog modal-lg fst-italic">
+        <div class="modal-content">
+            <div class="modal-header fst-italic">
+                <h5 class="modal-title fw-bold" id="title-modal">Detalle de entrada</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-2" id="reference-modal">
+                        </div>
+                        <div class="col-md-6 ms-auto" id="supplier-modal">
+                        </div>
+                        <div class="col-md-4 ms-auto" id="created-modal">
+                        </div>
+                        <div class="col ms-auto" id="description-modal">
+                        </div>
+                    </div>
+                    <div class="row">
+                    <table class="table my-table table-hover text-center fst-italic">
+                        <thead class="fw-semibold ">
+                            <tr>
+                                <th scope="col">Código</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Categoria</th>
+                                <th scope="col">Cantidad</th>
+                            </tr>
+                        </thead>
+                        <tbody  id="input-detail-list">
+                            
+                        </tbody>
+                    </table>
+                        
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer justify-content-center" id="btn-detail-modal">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i> Cerrar</button>
+                
+                {% comment %} <div class="vr"></div> {% endcomment %}
+            </div>
+        </div>
+    </div>
+</div>

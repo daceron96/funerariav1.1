@@ -1,0 +1,38 @@
+<div class="modal fade" id="supplier-form-modal" t data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="titleModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="title-modal-supplier-form">Registrar nuevo proveedor</h5>
+                <button type="button" class="btn-close" onclick="reset_form('supplier-form','proveedor','create_supplier')"></button>
+            </div>
+            <div class="modal-body">
+                <form class="text-muted fst-italic text-center"  id="supplier-form" action="{% url 'supplier:supplier_create' %}" method="POST"  autocomplete="off"  >
+                    {%csrf_token%}
+
+                    <div class="form-floating mb-3 ">
+                        <input type="text" class="form-control" name='identifier' id="identifier" placeholder="Identificador">
+                        <label for="identifier" >Nit - Identificacion</label>
+                        <div class="invalid-feedback" id="invalid-identifier"></div>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" name="name" id="name" placeholder="nombre de proveedor">
+                        <label for="name">Nombre de proveedor</label>
+                        <div class="invalid-feedback" id="invalid-name"></div>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" name="phone" id="phone" placeholder="numero de telefono">
+                        <label for="phone">Número de contacto</label>
+                        <div class="invalid-feedback" id="invalid-phone"></div>
+                    </div>
+
+                    <div class="hstack gap-3 col-7 mx-auto">
+                        <button class="btn btn-primary" type="button" id='btn-save' onclick="create_supplier()"><i class="bi bi-bookmark-check"></i> Guardar</button>
+                        <div class="vr"></div>
+                        <button class="btn btn-danger" type="button" onclick="reset_form('supplier-form','proveedor')"><i class="bi bi-x-lg " ></i> Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
