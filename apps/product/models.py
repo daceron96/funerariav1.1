@@ -65,7 +65,7 @@ class ProductDetail(BaseModel):
 
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     supplier = models.ForeignKey(Supplier, on_delete=models.CASCADE)
-    code_list = models.CharField(max_length=500, blank=True, null=False)
+    code_list = models.CharField(max_length=1000, blank=True, null=False)
     stock_cellar = models.PositiveSmallIntegerField(default=0, blank=False, null=False)
     stock_wait = models.PositiveSmallIntegerField(default=0, blank=False, null=False)
     stock_loan = models.PositiveSmallIntegerField(default=0, blank=False, null=False)
