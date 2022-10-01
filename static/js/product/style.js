@@ -13,7 +13,6 @@ function create_product(){
 		dataType: 'json',
 
 		success: function(response){
-			console.log(response.name)
 			$('.table-active').removeClass('table-active');
 			let item = `
 				<tr class='table-active text-muted' id='tr-${response.id}' onClick=product_detail(${response.id})>
@@ -146,5 +145,35 @@ function change_state_product(id_product){
 		}
 
 	})
+
+}
+
+function search_product(){
+
+	$.ajax({
+		url : '/product/filter/name/',
+		method : 'GET',
+		data :{'term':  $('#input_search').val().trim()},
+
+		success : (response) =>{
+			$('#product-table-list').empty()
+
+			response.data.forEach( element => {
+				let item = `
+				<tr class=' text-muted' id='tr-${element.id}' onClick=product_detail(${element.id})>
+				<td id='td-state-${element.id}'><i class='bi bi-check-circle-fill text-success'></i></td>
+				<th> ${element.code} </th>
+				<td id='td-name-${element.id}'> ${element.name} </td>
+				<td id='td-category-${element.id}'> ${element.category} </td>`
+				item += td_style_danger(element.stock_cellar)
+				item += td_style_success(element.stock_wait)
+				item += td_style_success(element.stock_loan)
+				item +=`</tr>`
+			$('#product-table-list').prepend(item)
+			})
+		}
+
+	})
+
 
 }

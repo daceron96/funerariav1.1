@@ -12,7 +12,7 @@
         <input type="text" class="form-control" id="input_search" placeholder="Buscar producto"
             aria-describedby="btn_search">
         <button class="btn btn-outline-primary" type="button" id="btn_search"
-            onclick="filtrar_producto_nombre()">Buscar</button>
+            onclick="search_product()">Buscar</button>
     </div>
     <div class="col">
         <select class="form-select" id="select_category" onchange="filtrar_producto_categoria()">
@@ -84,6 +84,7 @@
 {% endblock %}
 {% block js%}
 <script src="{% static 'js/product/functions.js' %} "></script>
+<script src="{% static 'js/product/components.js' %} "></script>
 <script src="{% static 'js/core/functions.js' %} "></script>
 <script src="{% static 'js/product/style.js' %} "></script>
 
