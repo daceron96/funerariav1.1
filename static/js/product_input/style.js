@@ -102,7 +102,7 @@ function input_get_detail_deposit(input_id){
             $('#btn-save-deposit').attr('onClick', `send_deposit(${input_id})`)
             $('#reference-deposit-modal').empty().append(`<p><i class="bi bi-clipboard-minus-fill fs-5"></i> ${response.reference}</p>`)
 			$('#supplier-deposit-modal').empty().append(`<p><i class="bi bi-person-circle fs-5 "></i>  ${response.supplier}</p>`)
-			console.log(response.url)
+			console.log(response)
             $('#btn-download').attr('href',`/${response.url}`)
             product_list = response.data
             product_list.forEach((element) => {

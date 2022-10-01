@@ -161,12 +161,13 @@ class ProductInputUpdateView(UpdateView):
         }, status=200)
 
 class ProductInputDepositView(View):
-    
+    #TODO revisar esta funcion     
     def get(self,*args, **kwargs):
         pk = self.kwargs['pk']
         product_input = ProductInput.objects.get(id = pk)
         if(not product_input.created_qr):
             create_qr_code(pk)
+        product_input = ProductInput.objects.get(id = pk)
         product_list = []
         query = InputDetail.objects.filter(product_input=product_input)
         for detail in query:
