@@ -13,6 +13,7 @@ def filter_product_name(request):
 		for product in query:
 			data = {
 				'state' : product.state,
+				'id' : product.id,
 				'code' : product.code,
 				'name' : product.name,
 				'category' : product.category.name,
