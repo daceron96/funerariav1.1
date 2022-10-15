@@ -1,0 +1,72 @@
+{%extends 'core/base.html' %}
+{%load static%}
+{%block title %}Lista de de salidas{%endblock%}
+
+{%block content %}
+
+<div class="row px-4 ">
+    <h2 class="d-flex justify-content-center pb-2"><i class="bi bi-clipboard-data pe-1"></i> Lista de salidas </h2>
+    <div class="input-group col">
+        <input type="text" class="form-control" id="input_search" placeholder="Buscar producto"
+            aria-describedby="btn_search" onkeyup='product_autocomplete()'>
+        <button class="btn btn-outline-primary" type="button" id="btn_search"
+            onclick="filtrar_producto_nombre()">Buscar</button>
+    </div>
+    <div class="col">
+        <select class="form-select" id="select_category" onchange="filtrar_producto_categoria()">
+            <option value="-1">Todos los productos</option>
+            {% for category in categories %}
+            <option value="{{category.id}}">{{category.name}}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="d-grid gap-2 col d-md-flex">
+
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#output-form-modal">
+            <i class="bi bi-clipboard-plus pe-1"></i> Nueva salida
+        </button>
+    </div>
+</div>
+
+<hr>
+
+<div class="row px-4">
+    <table class="table my-table table-hover text-center fst-italic">
+        <thead class="fw-semibold">
+            <tr>
+                <th>Referencia</th>
+                <th>Tipo salida</th>
+                <th>Cliente</th>
+                <th>Cantidad</th>
+                <th>Registro</th>
+            </tr>
+        </thead>
+        <tbody id="output-table-list">
+            {% for out in object_list %}
+            
+            <tr id='tr-list-{{out.id}}' class="text-muted" onclick='output_detail({{out.id}})' >
+                <th>{{out.reference}}</th>
+                <td>{{out.output_type}}</td>
+                <td>{{out.name_client}}</td>
+                <td>{{out.quantity}}</td>
+                <td>{{out.created_date}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+{% include 'output/output_form.html' %}
+{% include 'output/output_detail.html' %}
+{% include 'core/success.html' %}
+
+
+
+{%endblock%}
+
+{%block js%}
+<script src="{% static 'js/product_output/functions.js' %} "></script>
+<script src="{% static 'js/product_output/components.js' %} "></script>
+<script src="{% static 'js/product_output/style.js' %} "></script>
+<script src="{% static 'js/core/functions.js' %} "></script>
+{%endblock %}

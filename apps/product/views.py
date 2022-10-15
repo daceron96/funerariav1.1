@@ -6,6 +6,7 @@ from django.views import View
 from django.http import JsonResponse
 from apps.product.models import Product, ProductCategory, ProductDetail
 from apps.product.forms import ProductForm
+from apps.supplier.models import Supplier
 
 # Create your views here.
 class ProductListView(ListView):
@@ -39,6 +40,7 @@ class ProductDetailView(DetailView):
 			'code' : self.get_object().code,
 			'name' : self.get_object().name,
 			'category' : self.get_object().category.name,
+			'description' : self.get_object().description,
 			'created_date' : self.get_object().created_date,
 			'supplier_list' : supplier_list
 		})
@@ -101,8 +103,6 @@ class ProductChangeState(View):
 			return JsonResponse({'error':"El proveedor no existe"},status = 400 )
 
 class ProductGetView(View):
-
-
 	def get(self, *args, **kwargs):
 		code = self.kwargs['code']
 		try:
@@ -115,3 +115,34 @@ class ProductGetView(View):
 			},status = 200)
 		except:
 			return JsonResponse({'error':{'code' : 'El código de producto ingresado no existe'}}, status = 400)
+
+
+class SearchProductCodeView(View):
+
+	def get(self, *args, **kwargs):
+		request_code = self.request.GET['code']
+		try:
+			index_code = request_code.index('-')
+			code = request_code[0:(index_code)]
+			index_identifier = request_code.index('|')
+			identifier = request_code[(index_identifier+1):len(request_code)]
+		except:
+			return JsonResponse({'code':'Formato de código incorrecto'}, status = 400)
+		
+		try:
+			product = Product.objects.get(code = code)
+			supplier = Supplier.objects.get(identifier = identifier)
+			detail = ProductDetail.objects.get(supplier=supplier, product = product)
+			code_list = eval(detail.code_list)
+			
+			for code in code_list:
+				if(code == request_code):
+					return JsonResponse({
+						'id' : product.id,
+						'code' : product.code,
+						'name' : product.name,
+						'code_list' : code
+					},status = 200)
+		except:
+			pass
+		return JsonResponse({'code':'Código no encontrado'}, status = 400)

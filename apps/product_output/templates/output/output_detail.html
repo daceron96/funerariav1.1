@@ -1,0 +1,61 @@
+<div class="modal fade" id="output-detail-modal" tabindex="-1" aria-labelledby="tile" aria-hidden="true">
+  <div class="modal-dialog modal-lg fst-italic">
+    <div class="modal-content">
+      <div class="modal-header fst-italic">
+        <h5 class="modal-title fw-bold" id="title-modal">Detalle de salida</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-6 ">
+              <ul class="list-group  ">
+                <li class="list-group-item" id="reference-modal"></li>
+                <li class="list-group-item" id="identifier-modal"></li>
+                <li class="list-group-item" id="invoice-number-modal"></li>
+                <li class="list-group-item" id="created-date-modal"></li>
+              </ul>
+            </div>
+            <div class="col-6">
+              <ul class="list-group ">
+                <li class="list-group-item" id="output-type-modal"></li>
+                <li class="list-group-item" id="name-client-modal"></li>
+                <li class="list-group-item" id="price-total-modal"></li>
+                <li class="list-group-item" id="quantity-modal"></li>
+              </ul>
+            </div>
+            <div class="col-12 mt-2">
+              <ul class="list-group ">
+                <li class="list-group-item" id="description-modal"></li>
+              </ul>
+            </div>
+          </div>
+          <div class="row ">
+            <h5 class="text-center mt-2">Lista de productos</h5>
+            <table class="table my-table table-hover text-center fst-italic">
+              <thead class="fw-semibold ">
+                <tr>
+                  <th scope="col">Código</th>
+                  <th scope="col">Nombre</th>
+                  <th scope="col">Categoria</th>
+                  <th scope="col">Cantidad</th>
+                </tr>
+              </thead>
+              <tbody id="output-detail-list">
+
+              </tbody>
+            </table>
+
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer justify-content-center" id="btn-detail-modal">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i>
+          Cerrar</button>
+
+        {% comment %} <div class="vr"></div> {% endcomment %}
+      </div>
+    </div>
+  </div>
+</div>

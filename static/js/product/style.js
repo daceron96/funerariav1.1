@@ -41,19 +41,21 @@ function product_detail(id_product){
 		url : `/product/detail/${id_product}/`,
 		type : "GET",
 		success : (response) =>{
-
 			//date of product
-			$('#title-modal').empty().append(`${response.code} - ${response.name}`)
-			$('#code-modal').empty().append(`<p><strong>Codigo: </strong>${response.code}</p>`)
-			$('#name-modal').empty().append(`<p><strong>Nombre: </strong>${response.name}</p>`)
-			$('#category-modal').empty().append(`<p><strong>Categoria: </strong>${response.category}</p>`)
-			$('#created-modal').empty().append(`<p><strong>Registro: </strong>${response.created_date}</p>`)
+			$('#title-modal').empty().append(`Detalle de producto ${response.code} - ${response.name}`)
+			$('#code-modal').empty().append(`<i class="bi bi-journal-medical fs-5"></i> Codigo: ${response.code}`)
+			$('#name-modal').empty().append(`<i class="bi bi-journal-minus  fs-5"></i> Nombre: ${response.name}`)
+			$('#category-modal').empty().append(`<i class="bi bi-card-checklist fs-5"></i> Categoria: ${response.category}`)
+			$('#created-modal').empty().append(`<i class="bi bi-calendar-date fs-5"></i> Fecha de registro: ${response.created_date}`)
+			response.description.length  == 0 ?
+			$('#description-modal').empty().append(`<i class="bi bi-chat-left-text fs-5 "></i> Descripcion: Sin descripcion`)
+			:
+			$('#description-modal').empty().append(`<i class="bi bi-chat-left-text fs-5 "></i> Descripcion: ${response.description}`)
 			$('#product-detail-modal').modal('show')
 
 			// date of table supplier
 			$('#product-detail-list').empty()
 			response.supplier_list.forEach(supplier => {
-				console.table(supplier)
 				item = `<tr>
 					<th>${supplier.identifier}</th>
 					<td>${supplier.name}</td>`

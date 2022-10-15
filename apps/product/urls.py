@@ -1,6 +1,6 @@
 from django.urls import path
 from apps.product.views import (ProductListView, ProductCreateView, ProductDetailView,
-    ProductChangeState, ProductUpdateView, ProductGetView)
+    ProductChangeState, ProductUpdateView, SearchProductCodeView, ProductGetView)
 from .functions import filter_product_name
 
 product_patterns = ([ 
@@ -10,7 +10,7 @@ product_patterns = ([
     path('update/<int:pk>/',ProductUpdateView.as_view(), name='product_update'),
     path('change/<int:pk>/',ProductChangeState.as_view(), name='product_change'),
     
-    
+    path('search/code/', SearchProductCodeView.as_view(), name='search_code'),
     path('get/<str:code>/',ProductGetView.as_view(), name='product_get'),
     path('filter/name/',filter_product_name, name = 'product_filter_name'),
 

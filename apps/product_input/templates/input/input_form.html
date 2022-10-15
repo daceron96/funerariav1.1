@@ -9,8 +9,7 @@
             </div>
             <div class="modal-body">
                 <div class="container-fluid  ">
-                    <form class="text-muted fst-italic text-center row" id="input-form"
-                        action="{% url 'product:product_create' %}" method="POST" autocomplete="off">
+                    <form class="text-muted fst-italic text-center row" id="input-form" method="POST" autocomplete="off">
                         {%csrf_token%}
                         <div class="form-floating col-6 mb-3 ">
                             <input type="text" class="form-control " name='reference' id="reference"

@@ -83,4 +83,5 @@ def create_qr_code(pk):
 		product_input.created_qr = True
 		product_input.image_qr = url
 		product_input.save()
-			
+
+

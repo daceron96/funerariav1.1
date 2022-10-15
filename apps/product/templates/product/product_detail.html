@@ -1,49 +1,59 @@
 <div class="modal fade" id="product-detail-modal" tabindex="-1" aria-labelledby="tile" aria-hidden="true">
-    <div class="modal-dialog modal-lg fst-italic">
-        <div class="modal-content">
-            <div class="modal-header fst-italic">
-                <h5 class="modal-title fw-bold" id="title-modal"></h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  <div class="modal-dialog modal-lg fst-italic">
+    <div class="modal-content">
+      <div class="modal-header fst-italic">
+        <h5 class="modal-title fw-bold" id="title-modal"></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-6">
+              <ul class="list-group">
+                <li class="list-group-item" id="code-modal"></li>
+                <li class="list-group-item" id="category-modal"></li>
+              </ul>
             </div>
-            <div class="modal-body">
-                <div class="container-fluid">
-                    <div class="row">
-                        <h6 class="fw-bold">Descripcion de producto</h6>
-                        <div class="col-md-4" id="code-modal">
-                        </div>
-                        <div class="col-md-4 ms-auto" id="name-modal">
-                        </div>
-                        <div class="col-md-4 ms-auto" id="category-modal">
-                        </div>
-                        <div class="col ms-auto" id="created-modal">
-                        </div>
-                    </div>
-                    <div class="row">
-                    <table class="table my-table table-hover text-center fst-italic">
-                        <thead class="fw-semibold ">
-                            <tr>
-                                <th scope="col">Nit - Identificacion</th>
-                                <th scope="col">Nombre proveedor</th>
-                                <th scope="col">En bodega</th>
-                                <th scope="col">En espera</th>
-                                <th scope="col">En prestamo</th>
-                            </tr>
-                        </thead>
-                        <tbody  id="product-detail-list">
-                            
-                        </tbody>
-                    </table>
-                        
-                    </div>
-                </div>
+            <div class="col-6">
+              <ul class="list-group">
+                <li class="list-group-item" id="name-modal"></li>
+                <li class="list-group-item" id="created-modal"></li>
+              </ul>
+            </div>
+            <div class="col-12 mt-2">
+              <ul class="list-group ">
+                <li class="list-group-item" id="description-modal"></li>
+              </ul>
+            </div>
+          </div>
+          <div class="row">
+            <table class="table my-table table-hover text-center fst-italic">
+              <thead class="fw-semibold ">
+                <tr>
+                  <th scope="col">Nit - Identificacion</th>
+                  <th scope="col">Nombre proveedor</th>
+                  <th scope="col">En bodega</th>
+                  <th scope="col">En espera</th>
+                  <th scope="col">En prestamo</th>
+                </tr>
+              </thead>
+              <tbody id="product-detail-list">
 
-            </div>
-            <div class="modal-footer justify-content-center" id="btn-detail-modal">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i> Cerrar</button>
-                <div class="vr"></div>
-                <button type="button" class="btn btn-primary" id="btn-update-product"><i class="bi bi-pencil-fill"></i> Modificar</button>
-                <div class="vr"></div>
-            </div>
+              </tbody>
+            </table>
+
+          </div>
         </div>
+
+      </div>
+      <div class="modal-footer justify-content-center" id="btn-detail-modal">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i>
+          Cerrar</button>
+        <div class="vr"></div>
+        <button type="button" class="btn btn-primary" id="btn-update-product"><i class="bi bi-pencil-fill"></i>
+          Modificar</button>
+        <div class="vr"></div>
+      </div>
     </div>
+  </div>
 </div>

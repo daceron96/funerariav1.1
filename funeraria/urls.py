@@ -21,7 +21,7 @@ from apps.core.views import HomePageView
 from apps.product.urls import product_patterns
 from apps.supplier.urls import supplier_patterns
 from apps.product_input.urls import product_input_patterns
-
+from apps.product_output.urls import product_output_patterns
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,6 +29,7 @@ urlpatterns = [
     path('', include(supplier_patterns)),
     path('product/', include(product_patterns)),
     path('input/', include(product_input_patterns)),
+    path('output/', include(product_output_patterns)),
 
 
 ]

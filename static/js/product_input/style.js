@@ -36,18 +36,26 @@ function input_detail(input_id){
         url : `/input/detail/${input_id}/`,
         method : "GET",
         success : (response) => {
+            console.log(response)
             $('#input-detail-list').empty()
-			$('#reference-modal').empty().append(`<p><i class="bi bi-clipboard-minus-fill fs-5"></i> ${response.reference}</p>`)
-			$('#supplier-modal').empty().append(`<p><i class="bi bi-person-circle fs-5 "></i>  ${response.supplier}</p>`)
-			$('#quantity-modal').empty().append(`<p><i class="bi bi-boxes fs-5"></i> ${response.quantity}</p>`)
-			$('#created-modal').empty().append(`<p><i class="bi bi-calendar-date-fill fs-5"></i> ${response.created_date}</p>`)
+            $('#reference-modal').empty().append(`<i class="bi bi-journal-minus fs-5"></i> Referencia: ${response.reference}`)
+            $('#quantity-modal').empty().append(`<i class="bi bi-boxes fs-5 "></i> Cantidad total: ${response.quantity}`)
+            $('#identifier-modal').empty().append(`<i class="bi bi-postcard fs-5 "></i> Identificador: ${response.identifier}`)
+            $('#supplier-modal').empty().append(`<i class="bi bi-person-badge fs-5 "></i> Nombre de proveedor: ${response.supplier}`)
+            $('#created-date-modal').empty().append(`<i class="bi bi-calendar-date fs-5 "></i> Fecha de registro: ${response.created_date}`)
+			
             $('#btn-deposit').remove()
             $('#btn-update-input').remove()
-            response.description === '' ? 
-			$('#description-modal').empty().append(`<p><i class="bi bi-body-text"></i> Sin descripcion</p>`)
-            :
-			$('#description-modal').empty().append(`<p><i class="bi bi-body-text"></i> ${response.description}</p>`)
+            response.description.length  == 0 ?
+			$('#description-modal').empty().append(`<i class="bi bi-chat-left-text fs-5 "></i> Descripcion: Sin descripcion`)
+			:
+			$('#description-modal').empty().append(`<i class="bi bi-chat-left-text fs-5 "></i> Descripcion: ${response.description}`)
             
+            response.in_wait ? 
+			$('#status-modal').empty().append(`<i class="bi bi-patch-check-fill text-warning fs-5"></i> Estado: En espera`)
+            :
+			$('#status-modal').empty().append(`<i class="bi bi-patch-check-fill text-success fs-5"></i> Estado: Ingresado`)
+
             if(response.in_wait){
                 if(!response.created_qr){
                     $('#btn-detail-modal').append(btn_update_deposit(response.id)) 
@@ -117,7 +125,6 @@ function input_get_detail_deposit(input_id){
 
 
 function create_input(){
-    
     form = {
         reference : $('#reference').val(),
         supplier : $('#supplier').val()

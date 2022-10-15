@@ -10,7 +10,7 @@
     <h2 class="d-flex justify-content-center pb-2"><i class="bi bi-clipboard-data pe-1"></i> Lista de productos </h2>
     <div class="input-group col">
         <input type="text" class="form-control" id="input_search" placeholder="Buscar producto"
-            aria-describedby="btn_search">
+            aria-describedby="btn_search" onchange='auto_complete()'>
         <button class="btn btn-outline-primary" type="button" id="btn_search"
             onclick="search_product()">Buscar</button>
     </div>

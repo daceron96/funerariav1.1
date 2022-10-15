@@ -84,7 +84,9 @@ class ProductInputDetailView(DetailView):
             'in_wait': self.get_object().in_wait,
             'reference': self.get_object().reference,
             'created_qr' : self.get_object().created_qr,
-            'supplier': f'{self.get_object().supplier.identifier} - {self.get_object().supplier.name} ',
+            'identifier' : self.get_object().supplier.identifier,
+            'supplier': self.get_object().supplier.name,
+            'quantity': self.get_object().quantity,
             'description': self.get_object().description,
             'created_date': self.get_object().created_date,
             'product_list': product_list

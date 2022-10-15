@@ -22,12 +22,11 @@ class ProductInput(BaseModel):
     def __str__(self):
         return str(self.reference)
 
-#TODO falta poner campos para la creacion y asignacion de la lista de codigos y lo mismo en el modelo principal
 class InputDetail(BaseModel):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     product_input = models.ForeignKey(ProductInput, on_delete=models.CASCADE)
     quantity = models.PositiveSmallIntegerField(blank=False, null=False)
-    code_list = models.CharField(max_length = 1000, default='')
+    code_list = models.CharField(max_length = 10000, default='')
     class Meta:
         
         verbose_name = "Detalle de entrada"

@@ -101,6 +101,7 @@ function reset_input(name='input'){
 	reset_form(`${name}-form`,'entrada','create_input')
 	$('#alert-list').addClass('visually-hidden')
 	$(`#${name}_product_list`).empty()
+	$(`#input_deposit_list`).empty()
 	product_list = []
 }
 
