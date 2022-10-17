@@ -3,4 +3,4 @@
 *.log
 db.sqlite3
 __pycache__/
-codigos-qr/
+codigos-qr/*
