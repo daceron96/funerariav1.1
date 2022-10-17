@@ -26,8 +26,8 @@ SECRET_KEY = 'django-insecure-wo)rhh6p87_x(spl@9s&z#8n(&52m*gv&2-7=)p^%7)3a1yham
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['137.184.62.246']
-# ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = ['137.184.62.246']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -75,28 +75,28 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'funeraria.wsgi.application'
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
 
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': "postgres",
-        'PASSWORD': "rQ0nIQH0kw06iQ9a",
-        'HOST': "db.arohjvibjhlfbmjtzotn.supabase.co",
-        'PORT': "5432",
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'postgres',
+#         'USER': "postgres",
+#         'PASSWORD': "rQ0nIQH0kw06iQ9a",
+#         'HOST': "db.arohjvibjhlfbmjtzotn.supabase.co",
+#         'PORT': "5432",
 
-    }
-}
+#     }
+# }
 
 
 # Password validation

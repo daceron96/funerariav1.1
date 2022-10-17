@@ -128,13 +128,12 @@ class SearchProductCodeView(View):
 			identifier = request_code[(index_identifier+1):len(request_code)]
 		except:
 			return JsonResponse({'code':'Formato de código incorrecto'}, status = 400)
-		
+	
 		try:
 			product = Product.objects.get(code = code)
 			supplier = Supplier.objects.get(identifier = identifier)
 			detail = ProductDetail.objects.get(supplier=supplier, product = product)
 			code_list = eval(detail.code_list)
-			
 			for code in code_list:
 				if(code == request_code):
 					return JsonResponse({

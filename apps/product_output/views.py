@@ -77,7 +77,7 @@ class ProductOutputCreateView(CreateView):
                 for key in index_list.keys():
                     detail = ProductDetail.objects.get(id = key)
                     code_list = eval(detail.code_list)
-                    product = Product.objects.get(id = key)
+                    product = detail.product
                     for code in index_list[key]:
                         code_list.remove(code)
 

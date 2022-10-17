@@ -197,7 +197,7 @@ class ProductInputDepositView(View):
             product_detail = ProductDetail.objects.get(supplier = product_input.supplier, product = detail.product)
             try:
                 code_list = eval(product_detail.code_list)
-                code_list.append(eval(detail.code_list))
+                code_list.extend(eval(detail.code_list))
             except:
                 code_list = eval(detail.code_list)
             
