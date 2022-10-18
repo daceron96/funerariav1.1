@@ -182,3 +182,22 @@ function filter_product(){
 	})
 
 }
+
+function get_total_product(){
+	
+	$.ajax({
+		url : '/product/total/',
+		method : 'GET',
+
+		success : (response) => {
+
+			$('#product-total-list').empty()
+			response.data.forEach(data => {
+				$('#product-total-list').prepend(tr_table_total(data))
+			})
+
+			$('#product-total-modal').modal('show')
+		}
+	})
+
+}

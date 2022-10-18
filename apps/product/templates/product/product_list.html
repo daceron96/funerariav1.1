@@ -7,79 +7,90 @@
 
 
 <div class="row px-4 ">
-    <h2 class="d-flex justify-content-center pb-2"><i class="bi bi-clipboard-data pe-1"></i> Lista de productos </h2>
-    <div class="input-group col">
-        <input type="text" class="form-control" id="input_search" placeholder="Buscar producto"
-            aria-describedby="btn_search" onchange='auto_complete()'>
-        <button class="btn btn-outline-primary" type="button" id="btn_search"
-            onclick="search_product()">Buscar</button>
-    </div>
-    <div class="col">
-        <select class="form-select" id="select_category" onchange="filter_product()">
-            <option value="-1">Todos los productos</option>
-            {% for category in categories %}
-            <option value="{{category.id}}">{{category.name}}</option>
-            {% endfor %}
-        </select>
-    </div>
-    <div class="d-grid gap-2 col d-md-flex">
-        
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#product-form-modal">
-            <i class="bi bi-clipboard-plus pe-1"></i> Nuevo producto
-        </button>
-    </div>
+  <h2 class="d-flex justify-content-center pb-2"><i class="bi bi-clipboard-data pe-1"></i> Lista de productos </h2>
+  <div class="input-group col">
+    <input type="text" class="form-control" id="input_search" placeholder="Buscar producto"
+      aria-describedby="btn_search" onchange='auto_complete()'>
+    <button class="btn btn-outline-primary" type="button" id="btn_search" onclick="search_product()">Buscar</button>
+  </div>
+  <div class="col">
+    <select class="form-select" id="select_category" onchange="filter_product()">
+      <option value="-1">Todos los productos</option>
+      {% for category in categories %}
+      <option value="{{category.id}}">{{category.name}}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="d-grid gap-2 col-2 d-md-flex">
+    <button type="button" class="btn btn-primary" onclick="get_total_product()">
+      <i class="bi bi-search"></i> Ver totales
+    </button>
+  </div>
+  <div class="d-grid gap-2 col d-md-flex">
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#product-form-modal">
+      <i class="bi bi-clipboard-plus pe-1"></i> Nuevo producto
+    </button>
+  </div>
 </div>
 <hr>
 <div class="row px-4">
-    <table class="table my-table table-hover text-center fst-italic">
-        <thead class="fw-semibold ">
-            <tr>
-                <th scope="col">Estado</th>
-                <th scope="col">Código</th>
-                <th scope="col">Nombre</th>
-                <th scope="col">Categoria</th>
-                <th scope="col">En bodega</th>
-                <th scope="col">En espera</th>
-                <th scope="col">En prestamo</th>
-            </tr>
-        </thead>
-        <tbody  id="product-table-list">
-            {%for product in object_list%}
-            <tr id='tr-{{product.id}}' class="text-muted" onclick='product_detail({{product.id}})'>
-                {% if product.state %}
-                    <th id="td-state-{{product.id}}"><i class="bi bi-check-circle-fill text-success"></i></th>
-                {%else %}
-                    <th id="td-state-{{product.id}}"><i class="bi bi-x-circle-fill text-danger"></i></th>
-                {%endif%}
-                <th >{{product.code}}</th>
-                <td id="td-name-{{product.id}}">{{product.name}}</td>
-                <td id="td-category-{{product.id}}">{{product.category}}</td>
-                {% if product.stock_cellar.stock_cellar__sum > 10 %}
-                    <td class="text-success fw-semibold"><i class="bi bi-patch-check-fill"></i> {{product.stock_cellar.stock_cellar__sum}}</td>
-                {% elif product.stock_cellar.stock_cellar__sum > 0 %}
-                    <td class="text-warning fw-semibold"><i class="bi bi-patch-exclamation-fill"></i> {{product.stock_cellar.stock_cellar__sum}}</td>
-                {% else %}
-                    <td class="text-danger fw-semibold"><i class="bi bi-patch-exclamation-fill"></i> {{product.stock_cellar.stock_cellar__sum}}</td>
-                {% endif %}
-                {% if product.stock_wait.stock_wait__sum > 0 %}
-                    <td class="text-warning fw-semibold"><i class="bi bi-patch-exclamation-fill"></i> {{product.stock_wait.stock_wait__sum}}</td>
-                {% else %}
-                    <td class="text-success fw-semibold"><i class="bi bi-patch-check-fill"></i> {{product.stock_wait.stock_wait__sum}}</td>
-                {% endif %}
-                {% if product.stock_loan.stock_loan__sum > 0 %}
-                    <td class="text-warning fw-semibold"><i class="bi bi-patch-exclamation-fill"></i> {{product.stock_loan.stock_loan__sum}}</td>
-                {% else %}
-                    <td class="text-success fw-semibold"><i class="bi bi-patch-check-fill"></i> {{product.stock_loan.stock_loan__sum}}</td>
-                {% endif %}
-                
-            </tr>
-            {%endfor%}
-        </tbody>
-    </table>
+  <table class="table my-table table-hover text-center fst-italic">
+    <thead class="fw-semibold ">
+      <tr>
+        <th scope="col">Estado</th>
+        <th scope="col">Código</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Categoria</th>
+        <th scope="col">En bodega</th>
+        <th scope="col">En espera</th>
+        <th scope="col">En prestamo</th>
+      </tr>
+    </thead>
+    <tbody id="product-table-list">
+      {%for product in object_list%}
+      <tr id='tr-{{product.id}}' class="text-muted" onclick='product_detail({{product.id}})'>
+        {% if product.state %}
+        <th id="td-state-{{product.id}}"><i class="bi bi-check-circle-fill text-success"></i></th>
+        {%else %}
+        <th id="td-state-{{product.id}}"><i class="bi bi-x-circle-fill text-danger"></i></th>
+        {%endif%}
+        <th>{{product.code}}</th>
+        <td id="td-name-{{product.id}}">{{product.name}}</td>
+        <td id="td-category-{{product.id}}">{{product.category}}</td>
+        {% if product.stock_cellar.stock_cellar__sum > 10 %}
+        <td class="text-success fw-semibold"><i class="bi bi-patch-check-fill"></i>
+          {{product.stock_cellar.stock_cellar__sum}}</td>
+        {% elif product.stock_cellar.stock_cellar__sum > 0 %}
+        <td class="text-warning fw-semibold"><i class="bi bi-patch-exclamation-fill"></i>
+          {{product.stock_cellar.stock_cellar__sum}}</td>
+        {% else %}
+        <td class="text-danger fw-semibold"><i class="bi bi-patch-exclamation-fill"></i>
+          {{product.stock_cellar.stock_cellar__sum}}</td>
+        {% endif %}
+        {% if product.stock_wait.stock_wait__sum > 0 %}
+        <td class="text-warning fw-semibold"><i class="bi bi-patch-exclamation-fill"></i>
+          {{product.stock_wait.stock_wait__sum}}</td>
+        {% else %}
+        <td class="text-success fw-semibold"><i class="bi bi-patch-check-fill"></i>
+          {{product.stock_wait.stock_wait__sum}}</td>
+        {% endif %}
+        {% if product.stock_loan.stock_loan__sum > 0 %}
+        <td class="text-warning fw-semibold"><i class="bi bi-patch-exclamation-fill"></i>
+          {{product.stock_loan.stock_loan__sum}}</td>
+        {% else %}
+        <td class="text-success fw-semibold"><i class="bi bi-patch-check-fill"></i>
+          {{product.stock_loan.stock_loan__sum}}</td>
+        {% endif %}
+
+      </tr>
+      {%endfor%}
+    </tbody>
+  </table>
 </div>
 
-{% include 'product/product_form.html' %}
 {% include 'core/success.html' %}
+{% include 'product/product_form.html' %}
+{% include 'product/product_total.html' %}
 {% include 'product/product_detail.html' %}
 {% endblock %}
 {% block js%}

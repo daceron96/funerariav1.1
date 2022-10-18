@@ -146,3 +146,25 @@ class SearchProductCodeView(View):
 			pass
 		return JsonResponse({'code':'Código no encontrado'}, status = 400)
 
+class TotalProducts(View):
+
+	def get(self, *args, **kwargs):
+
+		categorys = ProductCategory.objects.all()
+		total_list = []
+		for category in categorys:
+			detail_list = ProductDetail.objects.filter(product__category  = category) 
+			data = {
+				'name_category' : category.name,
+				'stock_cellar' : 0,
+				'stock_wait' : 0,
+				'stock_loan' : 0
+			}
+			for detail in detail_list:
+				data['stock_cellar'] += detail.stock_cellar
+				data['stock_wait'] += detail.stock_wait
+				data['stock_loan'] += detail.stock_loan
+			total_list.append(data)
+		
+		
+		return JsonResponse({'data':total_list}, status = 200)

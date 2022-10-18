@@ -32,32 +32,8 @@ const state_style = (state, id) => {
 
 const tr_table_list = (data) => {
   let state = state_style(data.state, data.id);
-  let stock_cellar = "";
-  let stock_loan = "";
-  let stock_wait = "";
+  let stocks = validate_style(data)
   
-  //style stock cellar according to your quantity
-  if (data.stock_cellar > 10) {
-    stock_cellar = td_style_success(data.stock_cellar);
-  } else if (data.stock_cellar == 0) {
-    stock_cellar = td_style_danger(data.stock_cellar);
-  } else {
-    stock_cellar = td_style_warning(data.stock_cellar);
-  }
-
-  //style stock loan according to your quantity
-  if (data.stock_loan == 0) {
-    stock_loan = td_style_success(data.stock_loan);
-  } else {
-    stock_loan = td_style_warning(data.stock_loan);
-  }
-
-  //style stock wait according to your quantity
-  if (data.stock_wait == 0) {
-    stock_wait = td_style_success(data.stock_wait);
-  } else {
-    stock_wait = td_style_warning(data.stock_loan);
-  }
 
   return `
     <tr class=' text-muted' id='tr-${data.id}' onClick=product_detail(${data.id})>
@@ -65,10 +41,24 @@ const tr_table_list = (data) => {
     <th> ${data.code} </th>
     <td id='td-name-${data.id}'> ${data.name} </td>
     <td id='td-category-${data.id}'> ${data.category} </td>
-    ${stock_cellar}
-    ${stock_wait}
-    ${stock_loan}
+    ${stocks.stock_cellar}
+    ${stocks.stock_wait}
+    ${stocks.stock_loan}
     </tr> 
   `
 
 };
+
+function tr_table_total(data){
+  let stocks = validate_style(data)
+
+  return `
+    <tr> 
+      <th>${data.name_category}</th>
+      ${stocks.stock_cellar}
+      ${stocks.stock_wait}
+      ${stocks.stock_loan}
+    </tr>
+  `
+
+}
