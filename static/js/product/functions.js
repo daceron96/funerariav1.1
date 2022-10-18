@@ -58,7 +58,7 @@ function validate_style(data){
   if (data.stock_wait == 0) {
     stock_wait = td_style_success(data.stock_wait);
   } else {
-    stock_wait = td_style_warning(data.stock_loan);
+    stock_wait = td_style_warning(data.stock_wait);
   }
 
   return {stock_cellar : stock_cellar, stock_loan: stock_loan, stock_wait: stock_wait}
