@@ -4,6 +4,7 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView
 from django.http import JsonResponse
 import json
+from apps.core.functions import parse_date
 from apps.product.models import Product, ProductDetail
 from .functions import validate_data,create_qr_code
 from .models import ProductInput, InputDetail
@@ -58,7 +59,7 @@ class ProductInputCreateView(CreateView):
                 'reference': product_input.reference,
                 'supplier': supplier.name,
                 'quantity': product_input.quantity,
-                'created': product_input.created_date
+                'created': parse_date(product_input.created_date)
             }, status=200)
         return JsonResponse({'error': errors}, status=400)
 
@@ -88,7 +89,7 @@ class ProductInputDetailView(DetailView):
             'supplier': self.get_object().supplier.name,
             'quantity': self.get_object().quantity,
             'description': self.get_object().description,
-            'created_date': self.get_object().created_date,
+            'created_date': parse_date(self.get_object().created_date),
             'product_list': product_list
         })
 

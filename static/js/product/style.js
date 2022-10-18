@@ -161,21 +161,24 @@ function search_product(){
 			$('#product-table-list').empty()
 
 			response.data.forEach( element => {
-				let item = `
-				<tr class=' text-muted' id='tr-${element.id}' onClick=product_detail(${element.id})>
-				<td id='td-state-${element.id}'><i class='bi bi-check-circle-fill text-success'></i></td>
-				<th> ${element.code} </th>
-				<td id='td-name-${element.id}'> ${element.name} </td>
-				<td id='td-category-${element.id}'> ${element.category} </td>`
-				item += td_style_danger(element.stock_cellar)
-				item += td_style_success(element.stock_wait)
-				item += td_style_success(element.stock_loan)
-				item +=`</tr>`
-			$('#product-table-list').prepend(item)
+				$('#product-table-list').prepend(tr_table_list(element))
 			})
 		}
-
 	})
+}
 
+function filter_product(){
+
+	$.ajax({
+		url : '/product/filter/category/',
+		method : 'GET',
+		data : {pk : $('#select_category').val()},
+		success : (response) =>{
+			$('#product-table-list').empty()
+			response.data.forEach(data => {
+				$('#product-table-list').prepend(tr_table_list(data))
+			})
+		}
+	})
 
 }

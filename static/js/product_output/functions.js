@@ -3,8 +3,11 @@ $(document).ready(function () {
 });
 
 function reset_output(){
+	
 	reset_form(`output-form`,'entrada','create_output')
 	$('#output_product_list').empty()
+	$('#code').removeClass('is-valid')
+	product_list = []
 	$('#alert-list').addClass('visually-hidden')
 }
 

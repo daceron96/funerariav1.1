@@ -1,13 +1,15 @@
 import json
+from humanize import intcomma
 from django.http import JsonResponse
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import CreateView
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from django.views import View
 
 from .forms import ProductOutputForm
 from .models import ProductOutput, OutputType, OutputDetail
-from apps.product.models import Product, ProductDetail
+from apps.core.functions import parse_date
+from apps.product.models import ProductDetail
 from apps.product.functions import validate_list
 
 
@@ -36,17 +38,16 @@ class ProductOutputDetailView(DetailView):
                 'quantity' : detail.quantity
             }
             output_list.append(data)
-        
         return JsonResponse({
             'reference' : self.get_object().reference,
             'output_type' : self.get_object().output_type.name,
             'identifier' : self.get_object().identifier,
             'name_client' : self.get_object().name_client,
             'description' : self.get_object().description,
-            'price_total' : self.get_object().price_total,
+            'price_total' : intcomma(self.get_object().price_total),
             'quantity' : self.get_object().quantity,
             'invoice_number' : self.get_object().invoice_number,
-            'created_date' : self.get_object().created_date,
+            'created_date' : parse_date(self.get_object().created_date),
             'output_list' : output_list
         }, status = 200)
 

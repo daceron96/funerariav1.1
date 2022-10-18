@@ -3,7 +3,6 @@ $(document).ready(function () {
 });
 
 function auto_complete() {
-  console.log('hol')
   var availableTags = [
     "ActionScript",
     "AppleScript",

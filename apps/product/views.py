@@ -1,9 +1,9 @@
-from math import prod
 from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views import View
 from django.http import JsonResponse
+from apps.core.functions import parse_date
 from apps.product.models import Product, ProductCategory, ProductDetail
 from apps.product.forms import ProductForm
 from apps.supplier.models import Supplier
@@ -41,7 +41,7 @@ class ProductDetailView(DetailView):
 			'name' : self.get_object().name,
 			'category' : self.get_object().category.name,
 			'description' : self.get_object().description,
-			'created_date' : self.get_object().created_date,
+			'created_date' : parse_date(self.get_object().created_date),
 			'supplier_list' : supplier_list
 		})
 
@@ -145,3 +145,4 @@ class SearchProductCodeView(View):
 		except:
 			pass
 		return JsonResponse({'code':'Código no encontrado'}, status = 400)
+

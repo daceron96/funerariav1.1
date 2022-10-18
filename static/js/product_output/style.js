@@ -49,8 +49,8 @@ function create_output() {
 
     success: (response) => {
       reset_output();
+      $('.table-active').removeClass('table-active')
       $("#output-table-list").prepend(tr_table_list(response));
-      console.log(response);
     },
     error: (response) => {
       $("#alert-list").addClass("visually-hidden");

@@ -1,7 +1,7 @@
 from django.urls import path
 from apps.product.views import (ProductListView, ProductCreateView, ProductDetailView,
     ProductChangeState, ProductUpdateView, SearchProductCodeView, ProductGetView)
-from .functions import filter_product_name
+from .functions import filter_product_name, filter_product_by_category
 
 product_patterns = ([ 
     path('list/',ProductListView.as_view(), name = 'product_list'),
@@ -13,5 +13,6 @@ product_patterns = ([
     path('search/code/', SearchProductCodeView.as_view(), name='search_code'),
     path('get/<str:code>/',ProductGetView.as_view(), name='product_get'),
     path('filter/name/',filter_product_name, name = 'product_filter_name'),
+    path('filter/category/',filter_product_by_category, name = 'product_filter_category'),
 
 ],'product')
