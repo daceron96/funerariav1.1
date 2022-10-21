@@ -19,7 +19,7 @@ function search_code() {
           $(".is-invalid").removeClass("is-invalid");
           $("#code").addClass("is-valid").val("").focus();
           product_list.push(item(response));
-          $("#output_product_list").prepend(
+          $("#loan_product_list").prepend(
             tr_table_add(...product_list.slice(-1))
           );
         }
@@ -31,16 +31,17 @@ function search_code() {
   }
 }
 
-function create_output() {
-  form = $("#output-form")
+
+function create_loan() {
+  form = $("#loan-form")
     .serializeArray()
     .reduce(function (a, z) {
       a[z.name] = z.value;
       return a;
     }, {});
   $.ajax({
-    url: "/output/create/",
-    type: $("#output-form").attr("method"),
+    url: "/loan/create/",
+    type: $("#loan-form").attr("method"),
     data: {
       csrfmiddlewaretoken: getCSRFToken(),
       form: JSON.stringify(form),
@@ -48,10 +49,10 @@ function create_output() {
     },
 
     success: (response) => {
-      reset_output();
+      reset_loan();
       $('.table-active').removeClass('table-active')
-      $("#output-table-list").prepend(tr_table_list(response));
-			success("Registro de nueva salida","La nueva salida ha sido registrado exitosamente")
+      $("#loan-table-list").prepend(tr_table_list(response));
+			success("Registro de nuevo prestamo","El nuevo prestamo ha sido registrado exitosamente")
 
     },
     error: (response) => {
@@ -66,43 +67,41 @@ function create_output() {
   });
 }
 
-function output_detail(id) {
+function loan_detail(id) {
   $.ajax({
-    url: `/output/detail/${id}/`,
+    url: `/loan/detail/${id}/`,
     type: "GET",
     success: (response) => {
       $('#reference-modal').empty().append(`<i class="bi bi-journal-minus fs-5"></i> Referencia: ${response.reference}`)
-      $('#output-type-modal').empty().append(`<i class="bi bi-box-seam fs-5 "></i> Tipo de salida: ${response.output_type}`)
+      $('#loan-type-modal').empty().append(`<i class="bi bi-box-seam fs-5 "></i> Tipo de salida: ${response.loan_type}`)
       $('#identifier-modal').empty().append(`<i class="bi bi-postcard fs-5 "></i> Número de documento: ${response.identifier}`)
       $('#name-client-modal').empty().append(`<i class="bi bi-person-badge fs-5 "></i> Nombre de cliente: ${response.name_client}`)
-      $('#invoice-number-modal').empty().append(`<i class="bi bi-receipt fs-5 "></i> Nùmero de factura: ${response.invoice_number}`)
-      $('#price-total-modal').empty().append(`<i class="bi bi-currency-dollar fs-5 "></i> Precio total: ${response.price_total}`)
       $('#created-date-modal').empty().append(`<i class="bi bi-calendar-date fs-5 "></i> Fecha de registro: ${response.created_date}`)
       $('#quantity-modal').empty().append(`<i class="bi bi-boxes fs-5 "></i> Cantidad total: ${response.quantity}`)
       response.description.length  == 0 ?
 			$('#description-modal').empty().append(`<i class="bi bi-chat-left-text fs-5 "></i> Descripcion: Sin descripcion`)
 			:
 			$('#description-modal').empty().append(`<i class="bi bi-chat-left-text fs-5 "></i> Descripcion: ${response.description}`)
-      $('#output-detail-list').empty()
-      response.output_list.map( detail => {
-        $('#output-detail-list').prepend(tr_table_detail(detail))
+      $('#loan-detail-list').empty()
+      response.loan_list.map( detail => {
+        $('#loan-detail-list').prepend(tr_table_detail(detail))
       })
 
-      $("#output-detail-modal").modal("show");
+      $("#loan-detail-modal").modal("show");
     },
   });
 }
 
-function filter_output(){
+function filter_loan(){
 
 	$.ajax({
-		url : '/output/filter/type/',
+		url : '/loan/filter/type/',
 		method : 'GET',
 		data : {pk : $('#select_category').val()},
 		success : (response) =>{
-			$('#output-table-list').empty()
+			$('#loan-table-list').empty()
 			response.data.forEach(data => {
-				$('#output-table-list').prepend(tr_table_list(data))
+				$('#loan-table-list').prepend(tr_table_list(data))
 			})
       $('.table-active').removeClass('table-active')
 		}

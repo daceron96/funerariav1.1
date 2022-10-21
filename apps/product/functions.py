@@ -1,5 +1,3 @@
-from math import prod
-from unicodedata import category
 from django.http import JsonResponse
 
 from .models import Product, ProductDetail
@@ -66,5 +64,4 @@ def validate_list(product_list: list):
 					break
 		except:
 			error['code'] = "Codigo de producto invalido"
-	
 	return error, index_list

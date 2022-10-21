@@ -13,10 +13,10 @@
             onclick="filtrar_producto_nombre()">Buscar</button>
     </div>
     <div class="col">
-        <select class="form-select" id="select_category" onchange="filtrar_producto_categoria()">
-            <option value="-1">Todos los productos</option>
-            {% for category in categories %}
-            <option value="{{category.id}}">{{category.name}}</option>
+        <select class="form-select" id="select_category" onchange="filter_output()">
+            <option value="-1">Todas las salidas</option>
+            {% for output_type in output_type %}
+            <option value="{{output_type.id}}">{{output_type.name}}</option>
             {% endfor %}
         </select>
     </div>

@@ -1,9 +1,7 @@
-from email.policy import default
-from lib2to3.pytree import Base
-from unittest.util import _MAX_LENGTH
 from django.db import models
 from apps.core.models import BaseModel
 from apps.product.models import Product
+
 class OutputType(BaseModel):
     name = models.CharField(max_length = 50, blank = False, null = False)
     class Meta:
@@ -40,5 +38,3 @@ class OutputDetail(BaseModel):
 
     def __str__(self):
         return f'{self.product.name}'
-
-    

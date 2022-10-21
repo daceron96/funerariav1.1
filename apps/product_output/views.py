@@ -109,3 +109,5 @@ class ProductOutputCreateView(CreateView):
                 }, status = 201)
 
         return JsonResponse({'error': form.errors}, status=400)
+
+

@@ -1,0 +1,148 @@
+<div
+  class="modal fade"
+  id="loan-form-modal"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="titleModal"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="titleModal">Registrar nuevo prestamo</h5>
+        <button
+          type="button"
+          class="btn-close"
+          onclick="reset_loan()"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <form
+            class="text-muted fst-italic text-center row"
+            id="loan-form"
+            method="POST"
+            autocomplete="off"
+          >
+            {%csrf_token%}
+            <div class="form-floating col-6 mb-3">
+              <input
+                type="text"
+                class="form-control"
+                name="reference"
+                id="reference"
+                placeholder="Número de referencia"
+              />
+              <label for="reference" class="ms-3">Número de referencia</label>
+              <div class="invalid-feedback" id="invalid-reference"></div>
+            </div>
+            <div class="form-floating col-6 mb-3">
+              <select
+                class="form-select"
+                name="loan_type"
+                id="loan_type"
+                aria-label="loan type"
+              >
+                <option selected>Selecciona un tipo de prestamo</option>
+                {% for loan_type in loan_type%}
+                <option value="{{loan_type.id}}">{{loan_type.name}}</option>
+                {% endfor %}
+              </select>
+              <label for="loan" class="ms-3">Tipo de prestamo</label>
+              <div class="invalid-feedback" id="invalid-loan"></div>
+            </div>
+            <div class="form-floating col-6 mb-3">
+              <input
+                type="text"
+                class="form-control"
+                name="identifier"
+                id="identifier"
+                placeholder="Identificacion"
+              />
+              <label for="identifier" class="ms-3">Identificacion</label>
+              <div class="invalid-feedback" id="invalid-identifier"></div>
+            </div>
+            <div class="form-floating col-6 mb-3">
+              <input
+                type="text"
+                class="form-control"
+                name="name_client"
+                id="name_client"
+                placeholder="Nombre del cliente"
+              />
+              <label for="name_client" class="ms-3">Nombre del cliente</label>
+              <div class="invalid-feedback" id="invalid-name_client"></div>
+            </div>
+            <div class="form-floating mb-3">
+              <textarea
+                class="form-control"
+                name="description"
+                id="description"
+                placeholder="Descripción de producto"
+                style="height: 100px"
+              ></textarea>
+              <label for="description" class="ms-3">Descripción</label>
+            </div>
+            <div class="form-floating col-10 mb-3">
+              <input
+                type="text"
+                class="form-control"
+                name="code"
+                id="code"
+                placeholder="Código de producto"
+              />
+              <label for="code" class="ms-3">Código de producto</label>
+              <div class="invalid-feedback" id="invalid-code"></div>
+              <div class="valid-feedback" id="valid-code">
+                Código ingresado existosamente
+              </div>
+            </div>
+            <div class="form-floating col-2 mt-2">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                onclick="search_code()"
+              >
+                Agregar
+              </button>
+            </div>
+          </form>
+        </div>
+        <div class="container-fluid">
+          <h5 class="text-center">Lista productos</h5>
+          <table class="table text-center">
+            <thead>
+              <tr>
+                <th>Codigo</th>
+                <th>Nombre</th>
+                <th>Cantidad</th>
+                <th>Accion</th>
+              </tr>
+            </thead>
+            <tbody id="loan_product_list"></tbody>
+          </table>
+          <div
+            class="alert alert-danger text-center visually-hidden"
+            id="alert-list"
+            role="alert"
+          ></div>
+        </div>
+        <div class="gap-3 d-flex justify-content-center mt-3">
+          <button
+            class="btn btn-primary"
+            type="button"
+            id="btn-save"
+            onclick="create_loan()"
+          >
+            <i class="bi bi-bookmark-check"></i> Guardar
+          </button>
+          <div class="vr"></div>
+          <button class="btn btn-danger" type="button" onclick="reset_loan()">
+            <i class="bi bi-x-lg"></i> Cancelar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

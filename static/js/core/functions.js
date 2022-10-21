@@ -36,3 +36,5 @@ function success(title, message){
     $('#content-success').text(message)
 
 }
+
+
